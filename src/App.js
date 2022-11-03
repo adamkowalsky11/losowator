@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as ReactBootStrap from 'react-bootstrap';
 
 function App() {
@@ -51,6 +51,29 @@ function App() {
   function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  useEffect(() => {
+    const keyDownHandler = event => {
+
+      if(event.key === 'Enter'){
+
+        if(name === ''){
+          setError('Enter name')
+        }
+        else{
+        listItems.push(name);
+        setName('');
+        setError('');
+        }
+      }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, []);
 
   return (
     <div className='container pt-5 pb-5 my-5 border col-md-6 bg-light'>
