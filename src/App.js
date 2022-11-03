@@ -37,7 +37,7 @@ function App() {
     e.preventDefault();
 
     if(listItems[0] === undefined){
-      setError("List is empty, please add some people :P");
+      setError("List is empty, please add some people");
     }
     else{
     var winn = listItems[Math.floor(Math.random()*listItems.length)];
@@ -51,29 +51,6 @@ function App() {
   function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-  useEffect(() => {
-    const keyDownHandler = event => {
-
-      if(event.key === 'Enter'){
-
-        if(name === ''){
-          setError('Enter name')
-        }
-        else{
-        listItems.push(name);
-        setName('');
-        setError('');
-        }
-      }
-    };
-
-    document.addEventListener('keydown', keyDownHandler);
-
-    return () => {
-      document.removeEventListener('keydown', keyDownHandler);
-    };
-  }, []);
 
   return (
     <div className='container pt-5 pb-5 my-5 border col-md-6 bg-light'>
